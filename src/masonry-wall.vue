@@ -38,9 +38,9 @@
           row === column.itemIndices.length - 1 ? '0' : paddingPx
         }`"
       >
-        <slot :item="items[itemIndex]" :index="itemIndex">{{
-          items[itemIndex]
-        }}</slot>
+        <slot :item="items[itemIndex]" :index="itemIndex">
+          {{ items[itemIndex] }}
+        </slot>
       </div>
       <div class="masonry-column__floor" :data-column="columnIndex" />
     </div>
