@@ -26,15 +26,21 @@
       class="masonry-column"
       v-for="(column, columnIndex) in columns"
       :key="columnIndex"
-      :style="`margin-right: ${columnIndex === columns.length - 1 ? '0' : paddingPx}`"
+      :style="`margin-right: ${
+        columnIndex === columns.length - 1 ? '0' : paddingPx
+      }`"
     >
       <div
         class="masonry-item"
         v-for="(itemIndex, row) in column.itemIndices"
         :key="itemIndex"
-        :style="`margin-bottom: ${row === column.itemIndices.length - 1 ? '0' : paddingPx}`"
+        :style="`margin-bottom: ${
+          row === column.itemIndices.length - 1 ? '0' : paddingPx
+        }`"
       >
-        <slot :item="items[itemIndex]" :index="itemIndex">{{ items[itemIndex] }}</slot>
+        <slot :item="items[itemIndex]" :index="itemIndex">{{
+          items[itemIndex]
+        }}</slot>
       </div>
       <div class="masonry-column__floor" :data-column="columnIndex" />
     </div>
@@ -48,11 +54,20 @@ interface Column {
   itemIndices: number[]
 }
 
-function maxBy<T>(array: T[], transform: (element: T) => number): T | undefined {
+function maxBy<T>(
+  array: T[],
+  transform: (element: T) => number
+): T | undefined {
   if (array.length === 0) {
     return undefined
   }
-  return array.slice(1).reduce((previous, current) => (transform(current) > transform(previous) ? current : previous), array[0])
+  return array
+    .slice(1)
+    .reduce(
+      (previous, current) =>
+        transform(current) > transform(previous) ? current : previous,
+      array[0]
+    )
 }
 
 function createColumns(count: number): Column[] {
@@ -77,6 +92,10 @@ export default Vue.extend({
     padding: {
       type: Number,
       default: 0,
+    },
+    rtl: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -139,7 +158,9 @@ export default Vue.extend({
       this.fillColumns()
     },
     columnCount(padding: number): number {
-      const count = Math.floor((this.wall.scrollWidth + padding) / (this.columnWidth + padding))
+      const count = Math.floor(
+        (this.wall.scrollWidth + padding) / (this.columnWidth + padding)
+      )
       if (count < 1) {
         return 1
       }
@@ -150,8 +171,18 @@ export default Vue.extend({
         return
       }
       this.$nextTick(() => {
-        const floors = [...this.wall.getElementsByClassName('masonry-column__floor')] as HTMLDivElement[]
-        const floor = maxBy(floors, (spacer: HTMLDivElement) => spacer.clientHeight || 0)
+        const floors = [
+          ...this.wall.getElementsByClassName('masonry-column__floor'),
+        ] as HTMLDivElement[]
+
+        if (this.rtl) {
+          floors.reverse()
+        }
+
+        const floor = maxBy(
+          floors,
+          (spacer: HTMLDivElement) => spacer.clientHeight || 0
+        )
         this.addItem(+(floor?.dataset?.column ?? 0))
         this.fillColumns()
       })
@@ -175,6 +206,9 @@ export default Vue.extend({
       if (this.columnCount(value) !== this.columnCount(oldValue)) {
         this.redraw()
       }
+    },
+    rtl() {
+      this.recreate()
     },
   },
 })
