@@ -66,10 +66,10 @@ function createColumns(count: number): Column[] {
 }
 
 export default Vue.extend({
-  name: 'MasonryWall', // vue component name
+  name: 'MasonryWall',
   props: {
     items: {
-      type: Array,
+      type: Array as () => unknown[],
       required: true,
     },
     ssrColumns: {
