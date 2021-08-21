@@ -65,7 +65,7 @@ function createColumns(count: number): Column[] {
   return [...new Array(count)].map(() => ({ itemIndices: [] }))
 }
 
-export default Vue.extend({
+export default /*#__PURE__*/ Vue.extend({
   name: 'MasonryWall',
   props: {
     items: {
