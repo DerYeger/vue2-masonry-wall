@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.0...v1.1.1) (2021-08-21)
+
+
+### Bug Fixes
+
+* check if item is actually `undefined` ([22ac971](https://github.com/DerYeger/vue2-masonry-wall/commit/22ac9712495c4fd9fc6c68f2fcb17fc7977975a0))
+* remove redundant check in `padding` watcher ([a5fb508](https://github.com/DerYeger/vue2-masonry-wall/commit/a5fb508b02a79c03cd091a17960aacb8f459e8f7))
+
 # [1.1.0](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.0.0...v1.1.0) (2021-08-20)
 
 
