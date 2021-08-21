@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.1...v1.1.2) (2021-08-21)
+
+
+### Bug Fixes
+
+* specify side-effects ([6072a9a](https://github.com/DerYeger/vue2-masonry-wall/commit/6072a9aa83e8860107cb5d32c1764c2b48be8a48))
+
 ## [1.1.1](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.0...v1.1.1) (2021-08-21)
 
 
