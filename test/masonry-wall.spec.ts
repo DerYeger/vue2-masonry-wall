@@ -4,8 +4,8 @@
 
 import { mount } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
-import Vue from 'vue'
 import MasonryWall from '@/entry'
+import Vue from 'vue'
 
 let observeMock = jest.fn()
 let unobserveMock = jest.fn()
@@ -21,40 +21,26 @@ function mockResizeObserver() {
   window.ResizeObserver = window.ResizeObserver || resizeObserverMock
 }
 
-const TestComponent = {
-  template: `
-    <masonry-wall :items="items" :ssrColumns="ssrColumns" :width="1">
-      <template #default="{ item }">
-        <div style="height: 100px">
-          {{ item }}
-        </div>
-      </template>
-    </masonry-wall>`,
-  props: {
-    items: {
-      type: Array,
-      default: () => [1, 2, 3],
-    },
-    ssrColumns: {
-      type: Number,
-      default: undefined,
-    },
-  },
-}
+type MasonryWallType = InstanceType<typeof MasonryWall>
+
+const TestComponent = Vue.extend({
+  template: '<masonry-wall :items="[1, 2, 3]" />',
+})
 
 describe('MasonryWall', () => {
   beforeAll(() => {
     console.warn = function (message) {
       throw message
     }
-    Vue.use(MasonryWall)
   })
   beforeEach(() => {
     mockResizeObserver()
-    observeMock.mockReset()
-    unobserveMock.mockReset()
+  })
+  afterEach(() => {
+    jest.clearAllMocks()
   })
   it('can be installed', async () => {
+    Vue.use(MasonryWall)
     const wrapper = mount(TestComponent)
     await flushPromises()
     const wall = wrapper.find<HTMLDivElement>('.masonry-wall')
@@ -63,7 +49,7 @@ describe('MasonryWall', () => {
     expect(items.length).toEqual(3)
   })
   it('creates SSR columns', async () => {
-    const wrapper = mount(TestComponent, {
+    const wrapper = mount(MasonryWall, {
       propsData: {
         items: [1, 2],
         ssrColumns: 1,
@@ -78,7 +64,7 @@ describe('MasonryWall', () => {
     expect(items.length).toEqual(2)
   })
   it('reacts to item changes', async () => {
-    const wrapper = mount(TestComponent, {
+    const wrapper = mount(MasonryWall, {
       propsData: {
         items: [1, 2],
       },
@@ -102,7 +88,7 @@ describe('MasonryWall', () => {
   })
   it('unobserves the ResizeObserver', async () => {
     expect(observeMock.mock.calls.length).toEqual(0)
-    const wrapper = mount(TestComponent, {
+    const wrapper = mount(MasonryWall, {
       propsData: {
         items: [1, 2],
       },
@@ -112,5 +98,54 @@ describe('MasonryWall', () => {
     expect(unobserveMock.mock.calls.length).toEqual(0)
     wrapper.destroy()
     expect(unobserveMock.mock.calls.length).toEqual(1)
+  })
+  it('reacts to column-width prop changes', async () => {
+    const wrapper = mount<MasonryWallType>(MasonryWall, {
+      propsData: {
+        items: [1, 2],
+      },
+    })
+    const redrawSpy = jest.spyOn(wrapper.vm, 'redraw')
+    const columnCountSpy = jest.spyOn(wrapper.vm, 'columnCount')
+    await flushPromises()
+    expect(redrawSpy.mock.calls.length).toEqual(0)
+    columnCountSpy.mockReturnValueOnce(2).mockReturnValueOnce(3)
+    wrapper.setProps({
+      columnWidth: 300,
+    })
+    await flushPromises()
+    expect(redrawSpy.mock.calls.length).toEqual(1)
+  })
+  it('reacts to padding prop changes', async () => {
+    const wrapper = mount<MasonryWallType>(MasonryWall, {
+      propsData: {
+        items: [1, 2],
+      },
+    })
+    const redrawSpy = jest.spyOn(wrapper.vm, 'redraw')
+    const columnCountSpy = jest.spyOn(wrapper.vm, 'columnCount')
+    await flushPromises()
+    expect(redrawSpy.mock.calls.length).toEqual(0)
+    columnCountSpy.mockReturnValueOnce(2).mockReturnValueOnce(3)
+    wrapper.setProps({
+      padding: 42,
+    })
+    await flushPromises()
+    expect(redrawSpy.mock.calls.length).toEqual(1)
+  })
+  it('reacts to rtl prop changes', async () => {
+    const wrapper = mount<MasonryWallType>(MasonryWall, {
+      propsData: {
+        items: [1, 2],
+      },
+    })
+    const recreateSpy = jest.spyOn(wrapper.vm, 'recreate')
+    await flushPromises()
+    expect(recreateSpy.mock.calls.length).toEqual(0)
+    wrapper.setProps({
+      rtl: true,
+    })
+    await flushPromises()
+    expect(recreateSpy.mock.calls.length).toEqual(1)
   })
 })
