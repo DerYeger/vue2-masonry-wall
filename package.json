@@ -40,7 +40,8 @@
     "postbuild": "bundlesize",
     "lint": "eslint --ext \".js,.ts,.vue\"",
     "pretty": "prettier --write \"./**/*.{js,json,html,scss,ts,vue,yml}\"",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "ci": "yarn pretty && yarn lint && yarn test && yarn demo:build && yarn build"
   },
   "sideEffects": [
     "*.vue"
@@ -93,7 +94,7 @@
   "bundlesize": [
     {
       "path": "./dist/*.js",
-      "maxSize": "5kb"
+      "maxSize": "4kb"
     }
   ],
   "publishConfig": {
