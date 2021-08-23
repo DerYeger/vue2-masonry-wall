@@ -144,7 +144,7 @@ export default /*#__PURE__*/ Vue.extend({
     },
     columnCount(): number {
       const count = Math.floor(
-        (this.wall.scrollWidth + this.padding) /
+        (this.wall.getBoundingClientRect().width + this.padding) /
           (this.columnWidth + this.padding)
       )
       return count > 0 ? count : 1
@@ -154,17 +154,19 @@ export default /*#__PURE__*/ Vue.extend({
         return
       }
       this.$nextTick(() => {
-        const floors = [
+        const columnDivs = [...this.wall.children] as HTMLDivElement[]
           ...this.wall.getElementsByClassName('masonry-column__floor'),
         ] as HTMLDivElement[]
         if (this.rtl) {
-          floors.reverse()
+          columnDivs.reverse()
         }
-        const floor = maxBy(
-          floors,
-          (spacer: HTMLDivElement) => spacer.clientHeight || 0
+        const target = columnDivs.reduce((prev, curr) =>
+          curr.getBoundingClientRect().height <
+          prev.getBoundingClientRect().height
+            ? curr
+            : prev
         )
-        this.addItem(+(floor?.dataset?.column ?? 0))
+        this.columns[+target.dataset.index!].itemIndices.push(this.cursor++)
         this.fillColumns()
       })
     },
