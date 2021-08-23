@@ -26,23 +26,24 @@
       class="masonry-column"
       v-for="(column, columnIndex) in columns"
       :key="columnIndex"
-      :style="`margin-right: ${
-        columnIndex === columns.length - 1 ? '0' : paddingPx
-      }`"
+      :data-index="columnIndex"
+      :style="{
+        marginRight: columnIndex === columns.length - 1 ? '0' : `${padding}px`,
+      }"
     >
       <div
         class="masonry-item"
         v-for="(itemIndex, row) in column.itemIndices"
         :key="itemIndex"
-        :style="`margin-bottom: ${
-          row === column.itemIndices.length - 1 ? '0' : paddingPx
-        }`"
+        :style="{
+          marginBottom:
+            row === column.itemIndices.length - 1 ? '0' : `${padding}px`,
+        }"
       >
         <slot :item="items[itemIndex]" :index="itemIndex">
           {{ items[itemIndex] }}
         </slot>
       </div>
-      <div class="masonry-column__floor" :data-column="columnIndex" />
     </div>
   </div>
 </template>
@@ -52,13 +53,6 @@ import Vue from 'vue'
 
 interface Column {
   itemIndices: number[]
-}
-
-function maxBy<T>(array: T[], map: (element: T) => number): T | undefined {
-  if (array.length === 0) {
-    return undefined
-  }
-  return array.reduce((prev, curr) => (map(curr) > map(prev) ? curr : prev))
 }
 
 function createColumns(count: number): Column[] {
@@ -116,25 +110,16 @@ export default /*#__PURE__*/ Vue.extend({
       return this.$refs.wall as HTMLDivElement
     },
     resizeObserver(): ResizeObserver {
-      return new ResizeObserver(this.redraw)
-    },
-    paddingPx(): string {
-      return `${this.padding}px`
+      return new ResizeObserver(() => this.redraw())
     },
   },
   methods: {
-    recreate() {
-      this.cursor = 0
-      this.columns = []
-      this.redraw()
-    },
-    redraw() {
-      if (this.columns.length === this.columnCount()) {
+    redraw(force = false) {
+      if (this.columns.length === this.columnCount() && !force) {
         return
       }
-      this.columns.splice(0)
       this.cursor = 0
-      this.columns.push(...createColumns(this.columnCount()))
+      this.columns = createColumns(this.columnCount())
       this.fillColumns()
     },
     columnCount(): number {
@@ -150,8 +135,6 @@ export default /*#__PURE__*/ Vue.extend({
       }
       this.$nextTick(() => {
         const columnDivs = [...this.wall.children] as HTMLDivElement[]
-          ...this.wall.getElementsByClassName('masonry-column__floor'),
-        ] as HTMLDivElement[]
         if (this.rtl) {
           columnDivs.reverse()
         }
@@ -165,16 +148,10 @@ export default /*#__PURE__*/ Vue.extend({
         this.fillColumns()
       })
     },
-    addItem(index: number) {
-      const column = this.columns[index]
-      if (this.items[this.cursor] !== undefined) {
-        column.itemIndices.push(this.cursor++)
-      }
-    },
   },
   watch: {
     items() {
-      this.recreate()
+      this.redraw(true)
     },
     columnWidth() {
       this.redraw()
@@ -183,7 +160,7 @@ export default /*#__PURE__*/ Vue.extend({
       this.redraw()
     },
     rtl() {
-      this.recreate()
+      this.redraw(true)
     },
   },
 })
@@ -195,15 +172,11 @@ export default /*#__PURE__*/ Vue.extend({
 }
 
 .masonry-column {
-  flex-grow: 1;
-  flex-basis: 0;
   display: flex;
+  flex-basis: 0;
   flex-direction: column;
-}
-
-.masonry-column__floor {
   flex-grow: 1;
-  height: 0;
-  z-index: -1;
+  height: fit-content;
+  height: -moz-fit-content;
 }
 </style>
