@@ -21,7 +21,7 @@
 <!--SOFTWARE.-->
 
 <template>
-  <div class="masonry-wall" ref="wall" :class="{ ready }">
+  <div class="masonry-wall" ref="wall">
     <div
       class="masonry-column"
       v-for="(column, columnIndex) in columns"
@@ -97,18 +97,15 @@ export default /*#__PURE__*/ Vue.extend({
       return {
         columns: columns,
         cursor: this.items.length,
-        ready: false,
       }
     }
     return {
       columns: [],
       cursor: 0,
-      ready: false,
     }
   },
   mounted() {
     this.redraw()
-    this.ready = true
     this.resizeObserver.observe(this.wall)
   },
   beforeDestroy() {
@@ -135,11 +132,9 @@ export default /*#__PURE__*/ Vue.extend({
       if (this.columns.length === this.columnCount()) {
         return
       }
-      this.ready = false
       this.columns.splice(0)
       this.cursor = 0
       this.columns.push(...createColumns(this.columnCount()))
-      this.ready = true
       this.fillColumns()
     },
     columnCount(): number {
@@ -150,7 +145,7 @@ export default /*#__PURE__*/ Vue.extend({
       return count > 0 ? count : 1
     },
     fillColumns() {
-      if (!this.ready || this.cursor >= this.items.length) {
+      if (this.cursor >= this.items.length) {
         return
       }
       this.$nextTick(() => {
@@ -197,10 +192,6 @@ export default /*#__PURE__*/ Vue.extend({
 <style scoped>
 .masonry-wall {
   display: flex;
-}
-
-.masonry-wall:not(.ready) {
-  opacity: 0;
 }
 
 .masonry-column {
