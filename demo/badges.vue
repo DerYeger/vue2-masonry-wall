@@ -63,7 +63,7 @@
     >
       <img
         alt="npm bundle size"
-        src="https://img.shields.io/bundlephobia/min/@yeger/vue2-masonry-wall"
+        src="https://img.shields.io/bundlephobia/minzip/@yeger/vue2-masonry-wall"
       />
     </a>
   </div>

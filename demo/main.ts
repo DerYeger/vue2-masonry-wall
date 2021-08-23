@@ -1,5 +1,5 @@
 import Vue, { VNode } from 'vue'
-import Dev from './serve.vue'
+import Dev from './app.vue'
 
 Vue.config.productionTip = false
 

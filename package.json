@@ -30,8 +30,9 @@
     "src/**/*.vue"
   ],
   "scripts": {
-    "demo:serve": "vue-cli-service serve demo/serve.ts",
-    "demo:build": "vue-cli-service build demo/serve.ts --dest=demo-dist",
+    "demo:serve": "vite --config demo/vite.config.ts",
+    "demo:build": "vite --config demo/vite.config.ts build",
+    "demo:preview": "yarn demo:build && vite --config demo/vite.config.ts preview",
     "test": "jest",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
@@ -60,9 +61,6 @@
     "@types/resize-observer-browser": "0.1.6",
     "@typescript-eslint/eslint-plugin": "4.29.2",
     "@typescript-eslint/parser": "4.29.2",
-    "@vue/cli-plugin-babel": "4.5.13",
-    "@vue/cli-plugin-typescript": "4.5.13",
-    "@vue/cli-service": "4.5.13",
     "@vue/test-utils": "1.2.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "27.0.6",
@@ -81,6 +79,8 @@
     "rollup-plugin-vue": "5.1.9",
     "ts-jest": "27.0.5",
     "typescript": "4.3.5",
+    "vite": "2.5.0",
+    "vite-plugin-vue2": "1.8.1",
     "vue": "2.6.14",
     "vue-jest": "3.0.7",
     "vue-template-compiler": "2.6.14"

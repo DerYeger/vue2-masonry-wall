@@ -13,7 +13,6 @@
         :items="items"
         :padding="padding"
         :columnWidth="columnWidth"
-        :ssr-columns="1"
         :rtl="rtl"
       >
         <template #default="{ item, index }">
@@ -64,15 +63,6 @@ export default Vue.extend({
       this.items.splice(index, 1)
       this.items = [...this.items]
     },
-  },
-  created() {
-    document.title = '@yeger/vue2-masonry-wall'
-    document.documentElement.setAttribute('lang', 'en')
-    const metaElement = document.createElement('meta')
-    metaElement.setAttribute('name', 'description')
-    metaElement.content =
-      'Responsive masonry layout with SSR support and zero dependencies for Vue 2.'
-    document.getElementsByTagName('head')[0].appendChild(metaElement)
   },
 })
 </script>
@@ -159,11 +149,19 @@ label + * {
   margin-top: 1rem;
 }
 
+a {
+  transition: color 0.25s ease;
+}
+
 a:active,
-a:hover,
 a:link,
 a:visited {
   color: white;
+}
+
+a:focus-visible,
+a:hover {
+  color: var(--color-primary);
 }
 
 button {
