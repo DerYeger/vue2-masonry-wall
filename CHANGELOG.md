@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.4...v1.1.5) (2021-08-23)
+
+
+### Bug Fixes
+
+* inline all styles ([9168ee6](https://github.com/DerYeger/vue2-masonry-wall/commit/9168ee6cf1f5caad03ed950c1166fff86f2b3f4a))
+
 ## [1.1.4](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.3...v1.1.4) (2021-08-23)
 
 
