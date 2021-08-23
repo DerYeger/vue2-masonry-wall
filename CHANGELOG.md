@@ -1,3 +1,13 @@
+## [1.1.4](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.3...v1.1.4) (2021-08-23)
+
+
+### Bug Fixes
+
+* remove redundant `masonry-column__floor` elements ([7a7ce52](https://github.com/DerYeger/vue2-masonry-wall/commit/7a7ce528c834709fcc01c4bb77087b0134945dc6))
+* remove unused `ready` data ([15c7610](https://github.com/DerYeger/vue2-masonry-wall/commit/15c7610d7c1b5eb653432dce36e65c061a84f92f))
+* replace `cursor` with recursion parameter ([a659da1](https://github.com/DerYeger/vue2-masonry-wall/commit/a659da1081e268be3ee640b01c51dc4af7c73a3d))
+* use `getBoundingClientRect` instead of height properties ([46b3472](https://github.com/DerYeger/vue2-masonry-wall/commit/46b3472bc900ebc62e3456320a86f58e3ddcc3cb))
+
 ## [1.1.3](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.2...v1.1.3) (2021-08-21)
 
 
