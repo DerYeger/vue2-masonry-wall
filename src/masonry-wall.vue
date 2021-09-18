@@ -21,41 +21,89 @@
 <!--SOFTWARE.-->
 
 <template>
-  <div class="masonry-wall" ref="wall" style="display: flex">
-    <div
-      class="masonry-column"
-      v-for="(column, columnIndex) in columns"
-      :key="columnIndex"
-      :data-index="columnIndex"
-      style="
-         {
-          display: flex;
-          flex-basis: 0;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-      "
-      :style="{
-        height: ['-webkit-fit-content', '-moz-fit-content', 'fit-content'],
-        marginRight: columnIndex === columns.length - 1 ? '0' : `${padding}px`,
-      }"
-    >
+  <div class="wall-wrap">
+    <div class="masonry-wall" ref="wall" style="display: flex">
       <div
-        class="masonry-item"
-        v-for="(itemIndex, row) in column.itemIndices"
-        :key="itemIndex"
+        class="masonry-column"
+        v-for="(column, columnIndex) in columns"
+        :key="columnIndex"
+        :data-index="columnIndex"
+        style="
+           {
+            display: flex;
+            flex-basis: 0;
+            flex-direction: column;
+            flex-grow: 1;
+          }
+        "
         :style="{
-          marginBottom:
-            row === column.itemIndices.length - 1 ? '0' : `${padding}px`,
+          height: ['-webkit-fit-content', '-moz-fit-content', 'fit-content'],
+          marginRight: columnIndex === columns.length - 1 ? '0' : `${padding}px`,
         }"
       >
-        <slot :item="items[itemIndex]" :index="itemIndex">
-          {{ items[itemIndex] }}
-        </slot>
+        <div
+          class="masonry-item"
+          v-for="(itemIndex, row) in column.itemIndices"
+          :key="itemIndex"
+          :style="{
+            marginBottom:
+              row === column.itemIndices.length - 1 ? '0' : `${padding}px`,
+          }"
+        >
+          <slot :item="items[itemIndex]" :index="itemIndex">
+            {{ items[itemIndex] }}
+          </slot>
+        </div>
+      </div>
+    </div>
+    <div class="masonry-wall--fake" ref="fakeWall" style="display: flex">
+      <div
+        class="masonry-column"
+        v-for="(column, columnIndex) in fakeColumns"
+        :key="columnIndex"
+        :data-index="columnIndex"
+        style="
+           {
+            display: flex;
+            flex-basis: 0;
+            flex-direction: column;
+            flex-grow: 1;
+          }
+        "
+        :style="{
+          height: ['-webkit-fit-content', '-moz-fit-content', 'fit-content'],
+          marginRight:
+            columnIndex === columns.length - 1 ? '0' : `${padding}px`,
+        }"
+      >
+        <div
+          class="masonry-item"
+          v-for="(itemIndex, row) in column.itemIndices"
+          :key="itemIndex"
+          :style="{
+            marginBottom:
+              row === column.itemIndices.length - 1 ? '0' : `${padding}px`,
+          }"
+        >
+          <slot :item="items[itemIndex]" :index="itemIndex">
+            {{ items[itemIndex] }}
+          </slot>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.wall-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.masonry-wall--fake {
+  position: absolute;
+}
+</style>
 
 <script lang="ts">
 import Vue from 'vue'
@@ -99,14 +147,15 @@ export default /*#__PURE__*/ Vue.extend({
       this.items.forEach((_, i) => columns[i % count].itemIndices.push(i))
       return {
         columns: columns,
+        fakeColumns: [],
       }
     }
     return {
       columns: [],
+      fakeColumns: [],
     }
   },
   mounted() {
-    this.redraw()
     this.resizeObserver.observe(this.wall)
   },
   beforeDestroy() {
@@ -115,6 +164,9 @@ export default /*#__PURE__*/ Vue.extend({
   computed: {
     wall(): HTMLDivElement {
       return this.$refs.wall as HTMLDivElement
+    },
+    fakeWall(): HTMLDivElement {
+      return this.$refs.fakeWall as HTMLDivElement
     },
     resizeObserver(): ResizeObserver {
       return new ResizeObserver(() => this.redraw())
@@ -125,8 +177,10 @@ export default /*#__PURE__*/ Vue.extend({
       if (this.columns.length === this.columnCount() && !force) {
         return
       }
-      this.columns = createColumns(this.columnCount())
-      this.fillColumns(0)
+      this.fakeColumns = createColumns(this.columnCount())
+      this.fillFakeColumns(0, this.columns.length)
+
+      if (!this.columns.length) this.columns = this.fakeColumns
     },
     columnCount(): number {
       const count = Math.floor(
@@ -135,12 +189,13 @@ export default /*#__PURE__*/ Vue.extend({
       )
       return count > 0 ? count : 1
     },
-    fillColumns(itemIndex: number) {
+    fillFakeColumns(itemIndex: number, columnLength: number) {
       if (itemIndex >= this.items.length) {
+        if (columnLength) this.fillColumns()
         return
       }
       this.$nextTick(() => {
-        const columnDivs = [...this.wall.children] as HTMLDivElement[]
+        const columnDivs = [...this.fakeWall.children] as HTMLDivElement
         if (this.rtl) {
           columnDivs.reverse()
         }
@@ -150,8 +205,23 @@ export default /*#__PURE__*/ Vue.extend({
             ? curr
             : prev
         )
-        this.columns[+target.dataset.index!].itemIndices.push(itemIndex)
-        this.fillColumns(itemIndex + 1)
+        this.fakeColumns[+target.dataset.index!].itemIndices.push(itemIndex)
+        this.fillFakeColumns(itemIndex + 1, columnLength)
+      })
+    },
+    fillColumns() {
+      if (this.columns.length < this.fakeColumns.length) {
+        ;[...new Array(this.fakeColumns.length - this.columns.length)].forEach(
+          () => {
+            this.columns.push({ itemIndices: [] })
+          }
+        )
+      }
+      if (this.columns.length > this.fakeColumns.length) {
+        this.columns.pop()
+      }
+      this.fakeColumns.forEach((column, i) => {
+        this.columns[i].itemIndices = column.itemIndices
       })
     },
   },
