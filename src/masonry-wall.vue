@@ -41,12 +41,11 @@
       }"
     >
       <div
-        v-for="(itemIndex, row) in column.itemIndices"
+        v-for="(itemIndex, row) in column"
         :key="itemIndex"
         class="masonry-item"
         :style="{
-          marginBottom:
-            row === column.itemIndices.length - 1 ? '0' : `${padding}px`,
+          marginBottom: row === column.length - 1 ? '0' : `${padding}px`,
         }"
       >
         <slot :item="items[itemIndex]" :index="itemIndex">
@@ -60,12 +59,10 @@
 <script lang="ts">
 import Vue from 'vue'
 
-interface Column {
-  itemIndices: number[]
-}
+type Column = number[]
 
 function createColumns(count: number): Column[] {
-  return [...new Array(count)].map(() => ({ itemIndices: [] }))
+  return [...new Array(count)].map(() => [])
 }
 
 export default /*#__PURE__*/ Vue.extend({
@@ -96,7 +93,7 @@ export default /*#__PURE__*/ Vue.extend({
     const count = this.ssrColumns ?? 0
     if (count > 0) {
       const columns = createColumns(count)
-      this.items.forEach((_, i) => columns[i % count].itemIndices.push(i))
+      this.items.forEach((_, i) => columns[i % count].push(i))
       return {
         columns: columns,
       }
@@ -164,7 +161,7 @@ export default /*#__PURE__*/ Vue.extend({
             ? curr
             : prev
         )
-        this.columns[+target.dataset.index!].itemIndices.push(itemIndex)
+        this.columns[+target.dataset.index!].push(itemIndex)
         this.fillColumns(itemIndex + 1)
       })
     },
