@@ -1,3 +1,23 @@
+# [2.0.0](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.8...v2.0.0) (2021-09-29)
+
+
+### Bug Fixes
+
+* **props:** add default value to `ssrColumns` ([c7e7d58](https://github.com/DerYeger/vue2-masonry-wall/commit/c7e7d58c25cbd01b079519c80008dcd18aee9461))
+* replace `Column` object with `number[]` ([7ec6666](https://github.com/DerYeger/vue2-masonry-wall/commit/7ec666632139e807cccb2fd5cc73e9e4da762490))
+
+
+### Features
+
+* **emit:** add `redraw` and `redraw-skip` ([766216c](https://github.com/DerYeger/vue2-masonry-wall/commit/766216c4c08909cbca93352c4a10e5ef7f095e5b))
+* replace margins with flexbox `gap` ([89062d7](https://github.com/DerYeger/vue2-masonry-wall/commit/89062d701cfb36a4c6a668710060e2f187f4fbe5))
+* **vue:** use `vite` for building ([32eacad](https://github.com/DerYeger/vue2-masonry-wall/commit/32eacadd00af13cfc4e72f2ba6d5f80763a2bbb5))
+
+
+### BREAKING CHANGES
+
+* Rename `padding` to `gap`
+
 ## [1.1.8](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.7...v1.1.8) (2021-09-29)
 
 
