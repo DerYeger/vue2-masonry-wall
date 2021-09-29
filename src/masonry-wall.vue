@@ -126,10 +126,12 @@ export default /*#__PURE__*/ Vue.extend({
   methods: {
     redraw(force = false) {
       if (this.columns.length === this.columnCount() && !force) {
+        this.$emit('redraw-skip')
         return
       }
       this.columns = createColumns(this.columnCount())
       this.fillColumns(0)
+      this.$emit('redraw')
     },
     columnCount(): number {
       const count = Math.floor(
