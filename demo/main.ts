@@ -1,6 +1,6 @@
 import Vue, { VNode } from 'vue'
 import App from './app.vue'
-import MasonryWall from '@/entry'
+import MasonryWall from '@/index'
 
 Vue.config.productionTip = false
 
