@@ -21,11 +21,11 @@
 <!--SOFTWARE.-->
 
 <template>
-  <div class="masonry-wall" ref="wall" style="display: flex">
+  <div ref="wall" class="masonry-wall" style="display: flex">
     <div
-      class="masonry-column"
       v-for="(column, columnIndex) in columns"
       :key="columnIndex"
+      class="masonry-column"
       :data-index="columnIndex"
       style="
          {
@@ -41,9 +41,9 @@
       }"
     >
       <div
-        class="masonry-item"
         v-for="(itemIndex, row) in column.itemIndices"
         :key="itemIndex"
+        class="masonry-item"
         :style="{
           marginBottom:
             row === column.itemIndices.length - 1 ? '0' : `${padding}px`,
@@ -105,13 +105,6 @@ export default /*#__PURE__*/ Vue.extend({
       columns: [],
     }
   },
-  mounted() {
-    this.redraw()
-    this.resizeObserver.observe(this.wall)
-  },
-  beforeDestroy() {
-    this.resizeObserver.unobserve(this.wall)
-  },
   computed: {
     wall(): HTMLDivElement {
       return this.$refs.wall as HTMLDivElement
@@ -119,6 +112,27 @@ export default /*#__PURE__*/ Vue.extend({
     resizeObserver(): ResizeObserver {
       return new ResizeObserver(() => this.redraw())
     },
+  },
+  watch: {
+    items() {
+      this.redraw(true)
+    },
+    columnWidth() {
+      this.redraw()
+    },
+    padding() {
+      this.redraw()
+    },
+    rtl() {
+      this.redraw(true)
+    },
+  },
+  mounted() {
+    this.redraw()
+    this.resizeObserver.observe(this.wall)
+  },
+  beforeDestroy() {
+    this.resizeObserver.unobserve(this.wall)
   },
   methods: {
     redraw(force = false) {
@@ -153,20 +167,6 @@ export default /*#__PURE__*/ Vue.extend({
         this.columns[+target.dataset.index!].itemIndices.push(itemIndex)
         this.fillColumns(itemIndex + 1)
       })
-    },
-  },
-  watch: {
-    items() {
-      this.redraw(true)
-    },
-    columnWidth() {
-      this.redraw()
-    },
-    padding() {
-      this.redraw()
-    },
-    rtl() {
-      this.redraw(true)
     },
   },
 })

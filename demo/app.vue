@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <demo-header />
+    <DemoHeader />
     <main>
-      <tools
+      <Tools
         :padding.sync="padding"
         :column-width.sync="columnWidth"
         :rtl.sync="rtl"
         @create-item="addItem($event)"
         @clear-items="items = []"
       />
-      <masonry-wall
+      <MasonryWall
         :items="items"
         :padding="padding"
-        :columnWidth="columnWidth"
+        :column-width="columnWidth"
         :rtl="rtl"
       >
         <template #default="{ item, index }">
@@ -26,9 +26,9 @@
             <button class="primary" @click="removeItem(index)">Remove</button>
           </div>
         </template>
-      </masonry-wall>
+      </MasonryWall>
     </main>
-    <demo-footer />
+    <DemoFooter />
   </div>
 </template>
 
@@ -37,14 +37,12 @@ import Vue from 'vue'
 import DemoFooter from './demo-footer.vue'
 import DemoHeader from './demo-header.vue'
 import Tools from './tools.vue'
-import MasonryWall from '@/masonry-wall.vue'
 
 export default Vue.extend({
-  name: 'ServeDev',
+  name: 'App',
   components: {
     DemoHeader,
     DemoFooter,
-    MasonryWall,
     Tools,
   },
   data() {
