@@ -73,8 +73,8 @@ export default /*#__PURE__*/ Vue.extend({
       required: true,
     },
     ssrColumns: {
-      type: Number as () => number | undefined,
-      default: undefined,
+      type: Number,
+      default: 0,
     },
     columnWidth: {
       type: Number,
@@ -90,10 +90,9 @@ export default /*#__PURE__*/ Vue.extend({
     },
   },
   data() {
-    const count = this.ssrColumns ?? 0
-    if (count > 0) {
-      const columns = createColumns(count)
-      this.items.forEach((_, i) => columns[i % count].push(i))
+    if (this.ssrColumns > 0) {
+      const columns = createColumns(this.ssrColumns)
+      this.items.forEach((_, i) => columns[i % this.ssrColumns].push(i))
       return {
         columns: columns,
       }
