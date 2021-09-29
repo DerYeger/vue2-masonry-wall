@@ -19,11 +19,11 @@
     "masonry",
     "wall"
   ],
-  "main": "dist/masonry-wall.ssr.js",
-  "browser": "dist/masonry-wall.esm.js",
-  "module": "dist/masonry-wall.esm.js",
-  "unpkg": "dist/masonry-wall.min.js",
-  "types": "masonry-wall.d.ts",
+  "main": "dist/masonry-wall.umd.js",
+  "browser": "dist/masonry-wall.es.js",
+  "module": "dist/masonry-wall.es.js",
+  "unpkg": "dist/masonry-wall.umd.js",
+  "types": "dist/types/src/index.d.ts",
   "files": [
     "dist/*",
     "masonry-wall.d.ts",
