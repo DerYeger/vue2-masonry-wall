@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.7...v1.1.8) (2021-09-29)
+
+
+### Bug Fixes
+
+* remove various linting issues ([fccd51b](https://github.com/DerYeger/vue2-masonry-wall/commit/fccd51b50dda04f3c3491a0fc2debb3497d9c1d4))
+
 ## [1.1.7](https://github.com/DerYeger/vue2-masonry-wall/compare/v1.1.6...v1.1.7) (2021-09-27)
 
 
