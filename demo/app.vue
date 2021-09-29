@@ -3,16 +3,16 @@
     <DemoHeader />
     <main>
       <Tools
-        :padding.sync="padding"
         :column-width.sync="columnWidth"
+        :gap.sync="gap"
         :rtl.sync="rtl"
         @create-item="addItem($event)"
         @clear-items="items = []"
       />
       <MasonryWall
         :items="items"
-        :padding="padding"
         :column-width="columnWidth"
+        :gap="gap"
         :rtl="rtl"
       >
         <template #default="{ item, index }">
@@ -48,8 +48,8 @@ export default Vue.extend({
   data() {
     return {
       items: [128, 256, 128],
-      padding: 16,
       columnWidth: 400,
+      gap: 16,
       rtl: false,
     }
   },

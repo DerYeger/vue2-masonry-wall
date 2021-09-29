@@ -21,33 +21,26 @@
 <!--SOFTWARE.-->
 
 <template>
-  <div ref="wall" class="masonry-wall" style="display: flex">
+  <div
+    ref="wall"
+    class="masonry-wall"
+    :style="{ display: 'flex', gap: `${gap}px` }"
+  >
     <div
       v-for="(column, columnIndex) in columns"
       :key="columnIndex"
       class="masonry-column"
       :data-index="columnIndex"
-      style="
-         {
-          display: flex;
-          flex-basis: 0;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-      "
       :style="{
-        height: ['-webkit-fit-content', '-moz-fit-content', 'fit-content'],
-        marginRight: columnIndex === columns.length - 1 ? '0' : `${padding}px`,
+        display: 'flex',
+        'flex-basis': 0,
+        'flex-direction': 'column',
+        'flex-grow': 1,
+        height: ['-webkit-max-content', '-moz-max-content', 'max-content'],
+        gap: `${gap}px`,
       }"
     >
-      <div
-        v-for="(itemIndex, row) in column"
-        :key="itemIndex"
-        class="masonry-item"
-        :style="{
-          marginBottom: row === column.length - 1 ? '0' : `${padding}px`,
-        }"
-      >
+      <div v-for="itemIndex in column" :key="itemIndex" class="masonry-item">
         <slot :item="items[itemIndex]" :index="itemIndex">
           {{ items[itemIndex] }}
         </slot>
@@ -80,7 +73,7 @@ export default /*#__PURE__*/ Vue.extend({
       type: Number,
       default: 400,
     },
-    padding: {
+    gap: {
       type: Number,
       default: 0,
     },
@@ -116,7 +109,7 @@ export default /*#__PURE__*/ Vue.extend({
     columnWidth() {
       this.redraw()
     },
-    padding() {
+    gap() {
       this.redraw()
     },
     rtl() {
@@ -140,8 +133,8 @@ export default /*#__PURE__*/ Vue.extend({
     },
     columnCount(): number {
       const count = Math.floor(
-        (this.wall.getBoundingClientRect().width + this.padding) /
-          (this.columnWidth + this.padding)
+        (this.wall.getBoundingClientRect().width + this.gap) /
+          (this.columnWidth + this.gap)
       )
       return count > 0 ? count : 1
     },
