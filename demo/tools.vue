@@ -15,16 +15,16 @@
         <span>{{ columnWidth }}px</span>
       </div>
       <div class="row">
-        <label for="padding">Padding</label>
+        <label for="gap">Gap</label>
         <input
-          id="padding"
+          id="gap"
           type="range"
           min="0"
           max="256"
-          :value="padding"
-          @input="$emit('update:padding', +$event.target.value)"
+          :value="gap"
+          @input="$emit('update:gap', +$event.target.value)"
         />
-        <span>{{ padding }}px</span>
+        <span>{{ gap }}px</span>
       </div>
       <div class="row">
         <label for="rtl">RTL</label>

@@ -34,7 +34,7 @@
 
 ## Features
 
-- 📱 **Responsive**: Responsive with configurable padding and column width. Based on `ResizeObserver`.
+- 📱 **Responsive**: Responsive with configurable column width and gaps. Based on `ResizeObserver`.
 - 🔁 **Reactive**: Reacts to property changes.
 - 🪶 **Lightweight**: Zero dependencies. Less than 4 kB.
 - ⬅️ **RTL**: Supports LTR and RTL layouts.
@@ -66,13 +66,14 @@ Vue.use(MasonryWall)
 
 Props:
 - `items`: Array of items. Required.
-- `ssr-columns`: Number of pre-calculated columns for server-side-rendering. Optional.
-- `padding`: Spacing between items in `px`. Defaults to `0`.
+- `column-width`: Minimal width of columns in `px`.
+- `gap`: Spacing between items in `px`. Defaults to `0`.
 - `rtl`: Toggles between LTR (`false`) and RTL (`true`) layouts. Defaults to `false`.
+- `ssr-columns`: Number of server-side-rendered columns. Optional.
 
 ```vue
 <template>
-  <masonry-wall :items="items" :ssr-columns="1" :column-width="300" :padding="16">
+  <masonry-wall :items="items" :ssr-columns="1" :column-width="300" :gap="16">
     <template #default="{ item, index }">
       <div style="height: 100px">
         <h1>{{ item.title }}</h1>
@@ -117,7 +118,7 @@ $ yarn demo:build
 
 ## Disclaimer
 
-This library is based on [vue-masonry-wall](https://github.com/fuxingloh/vue-masonry-wall) by [Fuxing Loh](https://github.com/fuxingloh).
+This component originated as a modified version of [vue-masonry-wall](https://github.com/fuxingloh/vue-masonry-wall) by [Fuxing Loh](https://github.com/fuxingloh).
 
 ## License
 

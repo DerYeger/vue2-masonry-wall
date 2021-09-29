@@ -116,7 +116,7 @@ describe('MasonryWall', () => {
     await flushPromises()
     expect(redrawSpy.mock.calls.length).toEqual(1)
   })
-  it('reacts to padding prop changes', async () => {
+  it('reacts to gap prop changes', async () => {
     const wrapper = mount<MasonryWallType>(MasonryWall, {
       propsData: {
         items: [1, 2],
@@ -128,7 +128,7 @@ describe('MasonryWall', () => {
     expect(redrawSpy.mock.calls.length).toEqual(0)
     columnCountSpy.mockReturnValueOnce(2).mockReturnValueOnce(3)
     wrapper.setProps({
-      padding: 42,
+      gap: 42,
     })
     await flushPromises()
     expect(redrawSpy.mock.calls.length).toEqual(1)
