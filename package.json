@@ -39,7 +39,7 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
     "postbuild": "bundlesize",
-    "lint": "eslint --ext \".js,.ts,.vue\"",
+    "lint": "eslint \"./**/*.{js,ts,vue}\"",
     "pretty": "prettier --write \"./**/*.{js,json,html,scss,ts,vue,yml}\"",
     "prepublishOnly": "yarn build",
     "ci": "yarn pretty && yarn lint && yarn test && yarn demo:build && yarn build"
@@ -80,6 +80,7 @@
     "vite": "2.5.10",
     "vite-plugin-vue2": "1.8.2",
     "vue": "2.6.14",
+    "vue-eslint-parser": "7.11.0",
     "vue-jest": "3.0.7",
     "vue-template-compiler": "2.6.14"
   },
