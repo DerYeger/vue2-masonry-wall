@@ -36,7 +36,7 @@
 
 - 📱 **Responsive**: Responsive with configurable column width and gaps. Based on `ResizeObserver`.
 - 🔁 **Reactive**: Reacts to property changes.
-- 🪶 **Lightweight**: Zero dependencies. Less than 1.5 kB.
+- 🪶 **Lightweight**: Zero dependencies. Less than 1.6 kB.
 - ⬅️ **RTL**: Supports LTR and RTL layouts.
 
 ## Links
