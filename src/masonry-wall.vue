@@ -124,13 +124,15 @@ export default /*#__PURE__*/ Vue.extend({
     this.resizeObserver.unobserve(this.wall)
   },
   methods: {
-    redraw(force = false) {
+    async redraw(force = false) {
       if (this.columns.length === this.columnCount() && !force) {
         this.$emit('redraw-skip')
         return
       }
       this.columns = createColumns(this.columnCount())
-      this.fillColumns(0)
+      const scrollY = window.scrollY
+      await this.fillColumns(0)
+      window.scrollTo({ top: scrollY })
       this.$emit('redraw')
     },
     columnCount(): number {
@@ -140,24 +142,23 @@ export default /*#__PURE__*/ Vue.extend({
       )
       return count > 0 ? count : 1
     },
-    fillColumns(itemIndex: number) {
+    async fillColumns(itemIndex: number) {
       if (itemIndex >= this.items.length) {
         return
       }
-      this.$nextTick(() => {
-        const columnDivs = [...this.wall.children] as HTMLDivElement[]
-        if (this.rtl) {
-          columnDivs.reverse()
-        }
-        const target = columnDivs.reduce((prev, curr) =>
-          curr.getBoundingClientRect().height <
-          prev.getBoundingClientRect().height
-            ? curr
-            : prev
-        )
-        this.columns[+target.dataset.index!].push(itemIndex)
-        this.fillColumns(itemIndex + 1)
-      })
+      await this.$nextTick()
+      const columnDivs = [...this.wall.children] as HTMLDivElement[]
+      if (this.rtl) {
+        columnDivs.reverse()
+      }
+      const target = columnDivs.reduce((prev, curr) =>
+        curr.getBoundingClientRect().height <
+        prev.getBoundingClientRect().height
+          ? curr
+          : prev
+      )
+      this.columns[+target.dataset.index!].push(itemIndex)
+      await this.fillColumns(itemIndex + 1)
     },
   },
 })
