@@ -2,7 +2,7 @@
   <div id="app">
     <DemoHeader />
     <main>
-      <Tools
+      <DemoTools
         :column-width.sync="columnWidth"
         :gap.sync="gap"
         :rtl.sync="rtl"
@@ -36,14 +36,14 @@
 import Vue from 'vue'
 import DemoFooter from './demo-footer.vue'
 import DemoHeader from './demo-header.vue'
-import Tools from './tools.vue'
+import DemoTools from './demo-tools.vue'
 
 export default Vue.extend({
   name: 'App',
   components: {
-    DemoHeader,
     DemoFooter,
-    Tools,
+    DemoHeader,
+    DemoTools,
   },
   data() {
     return {

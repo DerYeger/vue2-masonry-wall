@@ -66,7 +66,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Tools',
+  name: 'DemoTools',
   props: {
     columnWidth: {
       type: Number,
