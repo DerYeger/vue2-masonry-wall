@@ -2,7 +2,7 @@
   <header class="secondary">
     <div class="row">
       <h1 id="title">@yeger/vue2-masonry-wall</h1>
-      <github-logo />
+      <GithubLogo />
     </div>
     <p id="subtitle">
       Responsive masonry layout with SSR support and zero dependencies for Vue
@@ -24,17 +24,17 @@
       <span>yarn add @yeger/vue2-masonry-wall</span>
       <span>npm install @yeger/vue2-masonry-wall</span>
     </samp>
-    <badges />
+    <BadgeList />
   </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Badges from './badges.vue'
+import BadgeList from './badge-list.vue'
 import GithubLogo from './github-logo.vue'
 
 export default Vue.extend({
-  components: { Badges, GithubLogo },
+  components: { BadgeList, GithubLogo },
 })
 </script>
 
