@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.5...v2.0.6) (2021-11-12)
+
+
+### Bug Fixes
+
+* restore scroll position after redrawing ([0f5b4d0](https://github.com/DerYeger/vue2-masonry-wall/commit/0f5b4d095f528b362ca6c1e5bd743c2a6801c8b0))
+
 ## [2.0.5](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.4...v2.0.5) (2021-11-08)
 
 
