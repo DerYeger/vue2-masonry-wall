@@ -67,13 +67,13 @@
     "vite": "2.7.13",
     "vite-plugin-dts": "0.9.9",
     "vite-plugin-vue2": "1.9.3",
-    "vue": "2.6.14",
+    "vue": "3.2.30",
     "vue-eslint-parser": "8.2.0",
     "vue-jest": "3.0.7",
     "vue-template-compiler": "2.6.14"
   },
   "peerDependencies": {
-    "vue": "^2.0.0"
+    "vue": "^2.0.0 || ^3.0.0"
   },
   "engines": {
     "node": ">=12"
