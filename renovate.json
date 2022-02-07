@@ -1,3 +1,6 @@
 {
-  "extends": ["github>DerYeger/renovate-config"]
+  "extends": [
+    "github>DerYeger/renovate-config",
+    "github>DerYeger/renovate-config:vue-2"
+  ]
 }
