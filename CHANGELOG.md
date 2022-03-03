@@ -1,3 +1,10 @@
+## [2.0.20](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.19...v2.0.20) (2022-03-03)
+
+
+### Bug Fixes
+
+* **release:** schedule release ([7dfe728](https://github.com/DerYeger/vue2-masonry-wall/commit/7dfe728f8a5b7e3d4efee786772433bff97e35c5))
+
 ## [2.0.19](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.18...v2.0.19) (2022-02-23)
 
 
