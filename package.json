@@ -70,7 +70,7 @@
     "vue": "2.6.14",
     "vue-eslint-parser": "9.0.3",
     "vue-jest": "3.0.7",
-    "vue-template-compiler": "2.6.14"
+    "vue-template-compiler": "2.7.2"
   },
   "peerDependencies": {
     "vue": "^2.0.0"
