@@ -2,5 +2,11 @@
   "extends": [
     "github>DerYeger/renovate-config",
     "github>DerYeger/renovate-config:vue-2"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["vite"],
+      "allowedVersions": "<3.0.0"
+    }
   ]
 }
