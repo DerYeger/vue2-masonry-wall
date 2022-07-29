@@ -1,3 +1,10 @@
+## [2.0.40](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.39...v2.0.40) (2022-07-29)
+
+
+### Bug Fixes
+
+* **release:** schedule release ([04f7dff](https://github.com/DerYeger/vue2-masonry-wall/commit/04f7dffcb1384665e846235a21fb66d7bdf2cec6))
+
 ## [2.0.39](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.38...v2.0.39) (2022-07-22)
 
 
