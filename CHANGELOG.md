@@ -1,3 +1,10 @@
+## [2.0.46](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.45...v2.0.46) (2022-08-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-vue to v9.4.0 ([e3069cb](https://github.com/DerYeger/vue2-masonry-wall/commit/e3069cbe93d1f2325feb62982437d80318c42e72))
+
 ## [2.0.45](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.44...v2.0.45) (2022-08-23)
 
 
