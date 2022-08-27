@@ -1,3 +1,10 @@
+## [2.0.49](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.48...v2.0.49) (2022-08-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v8.23.0 ([20fb1dc](https://github.com/DerYeger/vue2-masonry-wall/commit/20fb1dc7077755ae2c0c8f68acac00d42f35fe2f))
+
 ## [2.0.48](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.47...v2.0.48) (2022-08-26)
 
 
