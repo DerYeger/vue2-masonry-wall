@@ -1,3 +1,10 @@
+## [2.0.51](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.50...v2.0.51) (2022-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update cycjimmy/semantic-release-action action to v3.1.1 ([d37a0d6](https://github.com/DerYeger/vue2-masonry-wall/commit/d37a0d6893ccbb65846a3299c266b1fd2c30a37a))
+
 ## [2.0.50](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.49...v2.0.50) (2022-09-03)
 
 
