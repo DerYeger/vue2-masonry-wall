@@ -1,3 +1,10 @@
+## [2.0.53](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.52...v2.0.53) (2022-09-10)
+
+
+### Bug Fixes
+
+* **deps:** update vue monorepo ([00e94e1](https://github.com/DerYeger/vue2-masonry-wall/commit/00e94e163a7824f9a64e359297f3fde2af779e66))
+
 ## [2.0.52](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.51...v2.0.52) (2022-09-10)
 
 
