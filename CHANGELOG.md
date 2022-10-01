@@ -1,3 +1,10 @@
+## [2.0.57](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.56...v2.0.57) (2022-10-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @vue/compiler-sfc to v3.2.40 ([d1bd8cb](https://github.com/DerYeger/vue2-masonry-wall/commit/d1bd8cb82a4aea7752b1fa995751d4683df075a3))
+
 ## [2.0.56](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.55...v2.0.56) (2022-09-24)
 
 
