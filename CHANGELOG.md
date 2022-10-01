@@ -1,3 +1,10 @@
+## [2.0.58](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.57...v2.0.58) (2022-10-01)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([e6e07c3](https://github.com/DerYeger/vue2-masonry-wall/commit/e6e07c38c339375169b1e250e9412a0474d67d50))
+
 ## [2.0.57](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.56...v2.0.57) (2022-10-01)
 
 
