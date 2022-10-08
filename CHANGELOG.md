@@ -1,3 +1,10 @@
+## [2.0.59](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.58...v2.0.59) (2022-10-08)
+
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v5.39.0 ([578a788](https://github.com/DerYeger/vue2-masonry-wall/commit/578a7888f352c65094a293014f7135b7ded55bb3))
+
 ## [2.0.58](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.57...v2.0.58) (2022-10-01)
 
 
