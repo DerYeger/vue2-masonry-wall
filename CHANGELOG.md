@@ -1,3 +1,10 @@
+## [2.0.62](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.61...v2.0.62) (2022-10-15)
+
+
+### Bug Fixes
+
+* **deps:** update jamesives/github-pages-deploy-action action to v4.4.1 ([c790430](https://github.com/DerYeger/vue2-masonry-wall/commit/c79043074f1a808fe4ca1b85605fba6ec51e6c57))
+
 ## [2.0.61](https://github.com/DerYeger/vue2-masonry-wall/compare/v2.0.60...v2.0.61) (2022-10-15)
 
 
